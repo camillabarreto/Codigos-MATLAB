@@ -11,7 +11,7 @@ ta = 1/fa; % periodo de amostragem
 P = 4; % numero de periodos
 t = 0:ta:P/fs(1); % vetor temporal
 theta = 2*pi*(fs'*t); % termos das senoides
-s = sin(theta); 
+s = cos(theta); 
 s1 = A(1)*s(1,:);
 s2 = A(2)*s(2,:);
 s3 = A(3)*s(3,:);
@@ -32,7 +32,7 @@ title('DOMÍNIO DO TEMPO')
 xlabel('t [sec]') % eixo horizontal
 ylabel('s1(t)') % eixo vertical
 subplot(422)
-plot(f,abs(S1))%/length(f));
+plot(f,abs(S1)/length(S1));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s1(f)') % eixo vertical
@@ -43,7 +43,7 @@ plot(t,s2);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s2(t)') % eixo vertical
 subplot(424)
-plot(f,abs(S2))%/length(f));
+plot(f,abs(S2)/length(S2));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s2(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
@@ -53,7 +53,7 @@ plot(t,s3);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s3(t)') % eixo vertical
 subplot(426)
-plot(f,abs(S3))%/length(f));
+plot(f,abs(S3)/length(S3));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s3(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
@@ -63,15 +63,20 @@ plot(t,s);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s(t)') % eixo vertical
 subplot(428)
-plot(f,abs(S))%/length(f));
+plot(f,abs(S)/length(S));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 % 3) Utilizando a função 'norm', determine a potência média do sinal 's'.
 
-pot_s = norm(s)
+Pot_s = (norm(s)^2)/length(s)
 
 % 4) Utilizando a função 'pwelch', plote a Densidade Espectral de Potência do sinal 's'
 
-%dep = pwelch(S)
+[dep,win] = pwelch(s,[],[],[],fa);
+
+figure(2)
+figure(2)
+plot(win/1000,5*log10(dep))
+
