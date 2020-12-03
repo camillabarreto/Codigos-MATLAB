@@ -1,5 +1,5 @@
 clear all; close all; clc;
-% 1) Gerar um sinal s(t) composto pela somatória de 3 senos 
+% 1) Gerar um sinal s(t) composto pela somatória de 3 cossenos 
 %    com amplitudes de 6V, 2V e 4V e frequências de 1, 3 e 5kHz, respectivamente.
 
 A = [6 2 4]; % amplitudes dos sinais de informação
@@ -23,7 +23,7 @@ S2 = fftshift(fft(s2));
 S3 = fftshift(fft(s3));
 S = fftshift(fft(s)); % sinal de informação na frequencia
 
-% 2) Plotar em uma figura os três senos e o sinal 's' no domínio do tempo e da frequência.
+% 2) Plotar em uma figura os três cossenos e o sinal 's' no domínio do tempo e da frequência.
 
 figure(1)
 subplot(421)
@@ -76,7 +76,6 @@ Pot_s = (norm(s)^2)/length(s)
 
 [dep,win] = pwelch(s,[],[],[],fa);
 
-figure(2)
 figure(2)
 plot(win/1000,5*log10(dep))
 

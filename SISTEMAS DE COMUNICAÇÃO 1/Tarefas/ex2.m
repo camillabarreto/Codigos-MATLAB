@@ -1,6 +1,6 @@
 clear all; close all; clc;
 
-% 1) Gerar um sinal s(t) composto pela somatória de 3 senos com amplitudes de 5V, 5/3V e 1V
+% 1) Gerar um sinal s(t) composto pela somatória de 3 cossenos com amplitudes de 5V, 5/3V e 1V
 %    e frequências de 1, 3 e 5kHz, respectivamente.
 
 A = [5 5/3 1]; % amplitudes dos sinais de informação
@@ -12,7 +12,7 @@ ta = 1/fa; % periodo de amostragem
 P = 10; % numero de periodos
 t = 0:ta:P/fs(1); % vetor temporal
 theta = 2*pi*(fs'*t); % termos das senoides
-s = sin(theta); 
+s = cos(theta); 
 s1 = A(1)*s(1,:);
 s2 = A(2)*s(2,:);
 s3 = A(3)*s(3,:);
@@ -24,7 +24,7 @@ S2 = fftshift(fft(s2));
 S3 = fftshift(fft(s3));
 S = fftshift(fft(s)); % sinal de informação na frequencia
 
-% 2) Plotar em uma figura os três senos e o sinal 's' no domínio do tempo e da frequência
+% 2) Plotar em uma figura os três cossenos e o sinal 's' no domínio do tempo e da frequência
 
 figure(1)
 subplot(421)
@@ -33,7 +33,7 @@ title('DOMÍNIO DO TEMPO')
 xlabel('t [sec]') % eixo horizontal
 ylabel('s1(t)') % eixo vertical
 subplot(422)
-plot(f,abs(S1))%/length(f));
+plot(f,abs(S1)/length(S1));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s1(f)') % eixo vertical
@@ -44,7 +44,7 @@ plot(t,s2);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s2(t)') % eixo vertical
 subplot(424)
-plot(f,abs(S2))%/length(f));
+plot(f,abs(S2)/length(S2));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s2(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
@@ -54,7 +54,7 @@ plot(t,s3);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s3(t)') % eixo vertical
 subplot(426)
-plot(f,abs(S3))%/length(f));
+plot(f,abs(S3)/length(S3));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s3(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
@@ -64,7 +64,7 @@ plot(t,s);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s(t)') % eixo vertical
 subplot(428)
-plot(f,abs(S))%/length(f));
+plot(f,abs(S)/length(S));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
@@ -74,12 +74,12 @@ xlim([-2*fs(3) 2*fs(3)])
 %    - Passa alta (banda de passagem acima de 4kHz)
 %    - Passa faixa (banda de passagem entre 2 e 4kHz)
 
-fc = [2 4]*1e3;
-r = ((fa/2)-fc(1))/(fs(1)/P); p = 2*(fc(1)/(fs(1)/P)) + 1;
+fc = [2 4]*1e3; % frequencias de corte
+r = ((fa/2)-fc(1))/(fs(1)/P); p = 2*(fc(1)/(fs(1)/P)) + 1; % banda de rejeição e de passagem
 fpb = [zeros(1,r) ones(1,p) zeros(1,r)]; % FPB 2kHz
-r = 2*(fc(2)/(fs(1)/P))+1; p = ((fa/2)-fc(2))/(fs(1)/P);
+r = 2*(fc(2)/(fs(1)/P))+1; p = ((fa/2)-fc(2))/(fs(1)/P); % banda de rejeição e de passagem
 fpa = [ones(1,p) zeros(1,r) ones(1,p)]; % FPA 4kHz
-rl = ((fa/2)-fc(2))/(fs(1)/P); rc = 2*(fc(1)/(fs(1)/P)) + 1; p = (fc(2)-fc(1))/(fs(1)/P);
+rl = ((fa/2)-fc(2))/(fs(1)/P); rc = 2*(fc(1)/(fs(1)/P)) + 1; p = (fc(2)-fc(1))/(fs(1)/P); % bandas de rejeição e de passagem
 fpf = [zeros(1,rl) ones(1,p) zeros(1,rc) ones(1,p) zeros(1,rl)]; % FPF 2kHz - 4kHz
 
 % 4) Plotar em uma figura a resposta em frequência dos 3 filtros
@@ -119,28 +119,28 @@ title('DOMÍNIO DO TEMPO')
 xlabel('t [sec]') % eixo horizontal
 ylabel('s1(t)') % eixo vertical
 subplot(322)
-plot(f,abs(S_fpb))%/length(f));
+plot(f,abs(S_fpb)/length(S_fpb));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(323)
-plot(t,s_fpa);
+plot(t,s_fpf);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s1(t)') % eixo vertical
 subplot(324)
-plot(f,abs(S_fpa))%/length(f));
+plot(f,abs(S_fpf)/length(S_fpf));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(325)
-plot(t,s_fpf);
+plot(t,s_fpa);
 xlabel('t [sec]') % eixo horizontal
 ylabel('s1(t)') % eixo vertical
 subplot(326)
-plot(f,abs(S_fpf))%/length(f));
+plot(f,abs(S_fpa)/length(S_fpa));
 xlabel('f [Hz]') % eixo horizontal
 ylabel('s1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
