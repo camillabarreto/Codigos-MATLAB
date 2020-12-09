@@ -9,9 +9,9 @@ N = 100; % numero de amostras por periodo
 fa = N*fs(3); % frequencia de amostragem
 ta = 1/fa; % periodo de amostragem
 
-P = 10; % numero de periodos
+P = 4; % numero de periodos
 t = 0:ta:P/fs(1); % vetor temporal
-theta = 2*pi*(fs'*t); % termos das senoides
+theta = 2*pi*(fs'*t); % termos dos cossenos
 s = cos(theta); 
 s1 = A(1)*s(1,:);
 s2 = A(2)*s(2,:);
@@ -36,7 +36,7 @@ subplot(422)
 plot(f,abs(S1)/length(S1));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s1(f)') % eixo vertical
+ylabel('S1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(423)
@@ -46,7 +46,7 @@ ylabel('s2(t)') % eixo vertical
 subplot(424)
 plot(f,abs(S2)/length(S2));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s2(f)') % eixo vertical
+ylabel('S2(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(425)
@@ -56,7 +56,7 @@ ylabel('s3(t)') % eixo vertical
 subplot(426)
 plot(f,abs(S3)/length(S3));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s3(f)') % eixo vertical
+ylabel('S3(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(427)
@@ -66,7 +66,7 @@ ylabel('s(t)') % eixo vertical
 subplot(428)
 plot(f,abs(S)/length(S));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s(f)') % eixo vertical
+ylabel('S(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 % 3) Gerar 3 filtros ideais:
@@ -104,9 +104,9 @@ axis([-4*fc(1) 4*fc(1)  0 1.5])
 % 5) Passar o sinal s(t) através dos 3 filtros e plotar as saídas,
 %    no domínio do tempo e da frequência, para os 3 casos
 
-S_fpb = abs(S).*fpb;
-S_fpa = abs(S).*fpa;
-S_fpf = abs(S).*fpf;
+S_fpb = S.*fpb;
+S_fpa = S.*fpa;
+S_fpf = S.*fpf;
 
 s_fpb = ifft(ifftshift(S_fpb));
 s_fpa = ifft(ifftshift(S_fpa));
@@ -122,7 +122,7 @@ subplot(322)
 plot(f,abs(S_fpb)/length(S_fpb));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s1(f)') % eixo vertical
+ylabel('S1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(323)
@@ -132,7 +132,7 @@ ylabel('s1(t)') % eixo vertical
 subplot(324)
 plot(f,abs(S_fpf)/length(S_fpf));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s1(f)') % eixo vertical
+ylabel('S1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(325)
@@ -142,5 +142,5 @@ ylabel('s1(t)') % eixo vertical
 subplot(326)
 plot(f,abs(S_fpa)/length(S_fpa));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s1(f)') % eixo vertical
+ylabel('S1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])

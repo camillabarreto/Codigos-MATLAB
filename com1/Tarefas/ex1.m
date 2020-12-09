@@ -35,7 +35,7 @@ subplot(422)
 plot(f,abs(S1)/length(S1));
 title('DOMÍNIO DA FREQUÊNCIA')
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s1(f)') % eixo vertical
+ylabel('S1(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(423)
@@ -45,7 +45,7 @@ ylabel('s2(t)') % eixo vertical
 subplot(424)
 plot(f,abs(S2)/length(S2));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s2(f)') % eixo vertical
+ylabel('S2(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(425)
@@ -55,7 +55,7 @@ ylabel('s3(t)') % eixo vertical
 subplot(426)
 plot(f,abs(S3)/length(S3));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s3(f)') % eixo vertical
+ylabel('S3(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 subplot(427)
@@ -65,7 +65,7 @@ ylabel('s(t)') % eixo vertical
 subplot(428)
 plot(f,abs(S)/length(S));
 xlabel('f [Hz]') % eixo horizontal
-ylabel('s(f)') % eixo vertical
+ylabel('S(f)') % eixo vertical
 xlim([-2*fs(3) 2*fs(3)])
 
 % 3) Utilizando a função 'norm', determine a potência média do sinal 's'.
@@ -78,4 +78,7 @@ Pot_s = (norm(s)^2)/length(s)
 
 figure(2)
 plot(win/1000,5*log10(dep))
+title('DOMÍNIO DA FREQUÊNCIA')
+xlabel('f [Hz]') % eixo horizontal
+ylabel('Gs(f)') % eixo vertical
 
