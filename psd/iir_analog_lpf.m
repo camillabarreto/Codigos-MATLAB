@@ -27,7 +27,7 @@ Hp(p) = bp/Dp;
 figure(1)
 [h,w]=freqs(bp,ap);
 semilogx(w,20*log10(abs(h)))
-title(sprintf('Filtro Protótipo LP - Butterworth analógico, n = %d',n))
+title(sprintf('Filtro Protótipo PB - Butterworth analógico, n = %d',n))
 ylim([-60 10])
 grid on;
 hold on;
@@ -72,5 +72,5 @@ yr = [G0 G0-As G0-As];
 line(xr,yr,'Color','red','LineStyle','--');
 plot([wp ws]/(2*pi),([-Ap -As]+G0),'ko', 'MarkerSize',5);
 ylim([-60 10])
-title(sprintf('Filtro LP - Butterworth analógico, n = %d',n))
+title(sprintf('Filtro PB - Butterworth analógico, n = %d',n))
 hold off;
