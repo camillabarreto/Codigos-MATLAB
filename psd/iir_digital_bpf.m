@@ -41,7 +41,7 @@ yp = [-Ap -Ap -As];
 line(xp,yp,'Color','red','LineStyle','--');
 plot([WP WS],[-Ap -As],'ko', 'MarkerSize',5);
 ylim([-60 10])
-title(sprintf('Filtro Protótipo LP - cheby2 analógico, n = %d',n))
+title(sprintf('Filtro Protótipo PB - Chebyshev II analógico, n = %d',n))
 hold off;
 
 syms p
@@ -71,7 +71,7 @@ yp = [-As-20 -Ap -Ap -As-20]+G0;
 line(xp,yp,'Color','red','LineStyle','--');
 plot([lambda_s(1) lambda_p(1) lambda_p(2) lambda_s(2)],([-As -Ap -Ap -As]+G0),'ko', 'MarkerSize',5);
 ylim([-60 10])
-title(sprintf('Filtro PF - cheby2 analógico, n = %d',n))
+title(sprintf('Filtro PF - Chebyshev II analógico, n = %d',n))
 hold off;
 %%
 % Transformação Bilinear (Analog -> Digital) ( s -> 2*fa*(z-1)/(z+1) )
@@ -97,5 +97,5 @@ yp = [-As-20 -Ap -Ap -As-20]+G0;
 line(xp,yp,'Color','red','LineStyle','--');
 plot([fs1 fp1 fp2 fs2],([-As -Ap -Ap -As]+G0),'ko', 'MarkerSize',5);
 ylim([-60 10])
-title(sprintf('Filtro PF - cheby2 digital, n = %d',n))
+title(sprintf('Filtro PF - Chebyshev II digital, n = %d',n))
 hold off;
