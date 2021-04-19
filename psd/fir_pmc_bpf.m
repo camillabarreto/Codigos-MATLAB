@@ -1,7 +1,7 @@
 close all; clear all; clc;
 % Projetar o filtro passa faixa : Parks-McClellan
 
-fa = 8000;
+fa = 4000;
 
 Ap = 3;          
 Ar = 40;
@@ -12,8 +12,8 @@ fr = [400 1400];
 
 f = [fr(1) fp(1) fp(2) fr(2)];    
 a = [0 1 0];        
-%Apa = Ap-2; Ara = Ar+1; %n=29
-Apa = Ap; Ara = Ar; % n=22
+%Apa = Ap-2; Ara = Ar+1; %n=15
+Apa = Ap; Ara = Ar; % n=10
 dev = [10^(-Ara/20) (10^(Apa/20)-1)/(10^(Apa/20)+1)  10^(-Ara/20)]; 
 [n,fo,ao,w] = firpmord(f,a,dev,fa);
 b = firpm(n,fo,ao,w);
